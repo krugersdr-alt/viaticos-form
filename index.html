@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viáticos — Cargar Respaldo</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: #21272A;
+      color: #F5F5F5;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      background: #2C3338;
+      border: 1px solid #3A4249;
+      border-radius: 12px;
+      padding: 40px;
+      width: 100%;
+      max-width: 620px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .logo-dot {
+      width: 10px;
+      height: 10px;
+      background: #FF5B00;
+      border-radius: 50%;
+    }
+
+    .logo span {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #FF5B00;
+    }
+
+    h1 {
+      font-size: 22px;
+      font-weight: 700;
+      color: #FFFFFF;
+      margin-bottom: 6px;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: #8A9199;
+      margin-bottom: 32px;
+      line-height: 1.5;
+    }
+
+    .field {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #8A9199;
+      margin-bottom: 8px;
+    }
+
+    input[type="text"], textarea {
+      width: 100%;
+      background: #1C2226;
+      border: 1px solid #3A4249;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 13px;
+      color: #F5F5F5;
+      font-family: inherit;
+      transition: border-color 0.15s;
+      outline: none;
+    }
+
+    input[type="text"]:focus, textarea:focus {
+      border-color: #FF5B00;
+    }
+
+    input[type="text"]::placeholder, textarea::placeholder {
+      color: #4A5259;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 180px;
+      font-family: 'Courier New', monospace;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .hint {
+      font-size: 11px;
+      color: #4A5259;
+      margin-top: 6px;
+    }
+
+    .btn {
+      width: 100%;
+      background: #FF5B00;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.15s, opacity 0.15s;
+      margin-top: 8px;
+    }
+
+    .btn:hover { background: #E05000; }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .status {
+      margin-top: 20px;
+      padding: 14px;
+      border-radius: 8px;
+      font-size: 13px;
+      display: none;
+    }
+
+    .status.success {
+      background: #1A3A2A;
+      border: 1px solid #2A6A4A;
+      color: #5AE0A0;
+      display: block;
+    }
+
+    .status.error {
+      background: #3A1A1A;
+      border: 1px solid #6A2A2A;
+      color: #E08080;
+      display: block;
+    }
+
+    .status.loading {
+      background: #1C2226;
+      border: 1px solid #3A4249;
+      color: #8A9199;
+      display: block;
+    }
+
+    .divider {
+      border: none;
+      border-top: 1px solid #3A4249;
+      margin: 28px 0;
+    }
+
+    .step {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 12px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      background: #FF5B00;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-text {
+      font-size: 12px;
+      color: #8A9199;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">
+      <div class="logo-dot"></div>
+      <span>Kruger — Viáticos</span>
+    </div>
+
+    <h1>Cargar respaldo de facturas</h1>
+    <p class="subtitle">Pega el JSON generado por Gemini y el link de tu Google Sheet para registrar automáticamente los comprobantes.</p>
+
+    <div class="step"><div class="step-num">1</div><div class="step-text">Sube tus PDFs a Gemini y pide que procese las facturas.</div></div>
+    <div class="step"><div class="step-num">2</div><div class="step-text">Copia el JSON que Gemini entrega y pégalo abajo.</div></div>
+    <div class="step"><div class="step-num">3</div><div class="step-text">Ingresa el link de tu Google Sheet y haz clic en Registrar.</div></div>
+
+    <hr class="divider">
+
+    <div class="field">
+      <label>Link del Google Sheet</label>
+      <input type="text" id="sheetUrl" placeholder="https://docs.google.com/spreadsheets/d/..." />
+      <p class="hint">Debe ser un Sheet con la plantilla de viáticos ya preparada.</p>
+    </div>
+
+    <div class="field">
+      <label>JSON de Gemini</label>
+      <textarea id="jsonInput" placeholder='{"facturas": [...], "alertas": [...]}'></textarea>
+      <p class="hint">Copia el JSON completo que entregó Gemini.</p>
+    </div>
+
+    <button class="btn" id="submitBtn" onclick="enviar()">Registrar en Google Sheet</button>
+
+    <div class="status" id="status"></div>
+  </div>
+
+  <script>
+    async function enviar() {
+      const sheetUrl = document.getElementById('sheetUrl').value.trim();
+      const jsonRaw = document.getElementById('jsonInput').value.trim();
+      const btn = document.getElementById('submitBtn');
+      const status = document.getElementById('status');
+
+      status.className = 'status';
+      status.textContent = '';
+
+      if (!sheetUrl) {
+        status.className = 'status error';
+        status.textContent = 'Ingresa el link del Google Sheet.';
+        return;
+      }
+
+      if (!jsonRaw) {
+        status.className = 'status error';
+        status.textContent = 'Pega el JSON de Gemini antes de continuar.';
+        return;
+      }
+
+      let parsed;
+      try {
+        const clean = jsonRaw.replace(/```json|```/g, '').trim();
+        parsed = JSON.parse(clean);
+      } catch (e) {
+        status.className = 'status error';
+        status.textContent = 'El JSON no es válido. Verifica que esté completo y bien formateado.';
+        return;
+      }
+
+      btn.disabled = true;
+      status.className = 'status loading';
+      status.textContent = 'Enviando a n8n...';
+
+      try {
+        const res = await fetch('https://krugercorporation.app.n8n.cloud/webhook/viaticos-respaldo', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ sheetUrl, datos: parsed })
+        });
+
+        if (res.ok) {
+          status.className = 'status success';
+          status.textContent = '✓ Datos registrados correctamente en el Google Sheet.';
+        } else {
+          throw new Error(`HTTP ${res.status}`);
+        }
+      } catch (e) {
+        status.className = 'status error';
+        status.textContent = `Error al conectar con n8n: ${e.message}`;
+      } finally {
+        btn.disabled = false;
+      }
+    }
+  </script>
+</body>
+</html>
