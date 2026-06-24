@@ -3,66 +3,189 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Viáticos — Cargar Respaldo</title>
+  <title>Viáticos — Kruger</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
+    :root {
+      --orange: #FF5B00;
+      --orange-hover: #E05000;
+      --charcoal: #21272A;
+      --bg: #F7F7F7;
+      --surface: #FFFFFF;
+      --border: #E4E4E4;
+      --text-primary: #21272A;
+      --text-secondary: #6B7280;
+      --text-muted: #9CA3AF;
+    }
+
     body {
       font-family: 'Inter', system-ui, sans-serif;
-      background: #21272A;
-      color: #F5F5F5;
+      background: var(--bg);
+      color: var(--text-primary);
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* TOP BAR */
+    header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 40px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo-wrap img {
+      height: 32px;
+      width: auto;
+    }
+
+    .logo-divider {
+      width: 1px;
+      height: 20px;
+      background: var(--border);
+    }
+
+    .logo-product {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      letter-spacing: 0.02em;
+    }
+
+    .header-badge {
+      background: #FFF2EB;
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 20px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* MAIN */
+    main {
+      flex: 1;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 48px 24px;
+      gap: 32px;
+    }
+
+    /* LEFT — steps */
+    .sidebar {
+      width: 240px;
+      flex-shrink: 0;
+      padding-top: 8px;
+    }
+
+    .sidebar-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+    }
+
+    .step {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 20px;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--orange);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      flex-shrink: 0;
+      margin-top: 1px;
     }
 
-    .card {
-      background: #2C3338;
-      border: 1px solid #3A4249;
-      border-radius: 12px;
-      padding: 40px;
-      width: 100%;
-      max-width: 620px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 32px;
-    }
-
-    .logo-dot {
-      width: 10px;
-      height: 10px;
-      background: #FF5B00;
-      border-radius: 50%;
-    }
-
-    .logo span {
-      font-size: 13px;
+    .step-body {}
+    .step-label {
+      font-size: 12px;
       font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: #FF5B00;
+      color: var(--text-primary);
+      margin-bottom: 2px;
     }
-
-    h1 {
-      font-size: 22px;
-      font-weight: 700;
-      color: #FFFFFF;
-      margin-bottom: 6px;
-    }
-
-    .subtitle {
-      font-size: 13px;
-      color: #8A9199;
-      margin-bottom: 32px;
+    .step-desc {
+      font-size: 12px;
+      color: var(--text-secondary);
       line-height: 1.5;
     }
 
+    .step-connector {
+      width: 1px;
+      height: 16px;
+      background: var(--border);
+      margin-left: 11px;
+      margin-top: -8px;
+      margin-bottom: -4px;
+    }
+
+    /* CARD */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      width: 100%;
+      max-width: 560px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .card-header {
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .card-eyebrow {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .card-subtitle {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* FIELDS */
     .field {
       margin-bottom: 20px;
     }
@@ -71,36 +194,37 @@
       display: block;
       font-size: 12px;
       font-weight: 600;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: #8A9199;
-      margin-bottom: 8px;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+      letter-spacing: 0.01em;
     }
 
     input[type="text"], textarea {
       width: 100%;
-      background: #1C2226;
-      border: 1px solid #3A4249;
+      background: var(--bg);
+      border: 1.5px solid var(--border);
       border-radius: 8px;
-      padding: 12px 14px;
+      padding: 11px 14px;
       font-size: 13px;
-      color: #F5F5F5;
+      color: var(--text-primary);
       font-family: inherit;
-      transition: border-color 0.15s;
+      transition: border-color 0.15s, box-shadow 0.15s;
       outline: none;
     }
 
     input[type="text"]:focus, textarea:focus {
-      border-color: #FF5B00;
+      border-color: var(--orange);
+      box-shadow: 0 0 0 3px rgba(255,91,0,0.08);
+      background: #fff;
     }
 
     input[type="text"]::placeholder, textarea::placeholder {
-      color: #4A5259;
+      color: var(--text-muted);
     }
 
     textarea {
       resize: vertical;
-      min-height: 180px;
+      min-height: 160px;
       font-family: 'Courier New', monospace;
       font-size: 12px;
       line-height: 1.6;
@@ -108,123 +232,164 @@
 
     .hint {
       font-size: 11px;
-      color: #4A5259;
-      margin-top: 6px;
+      color: var(--text-muted);
+      margin-top: 5px;
     }
 
+    /* BUTTON */
     .btn {
       width: 100%;
-      background: #FF5B00;
-      color: #FFFFFF;
+      background: var(--orange);
+      color: #fff;
       border: none;
       border-radius: 8px;
-      padding: 14px;
+      padding: 13px;
       font-size: 14px;
       font-weight: 600;
+      font-family: inherit;
       cursor: pointer;
-      transition: background 0.15s, opacity 0.15s;
-      margin-top: 8px;
+      transition: background 0.15s, transform 0.1s;
+      margin-top: 4px;
+      letter-spacing: 0.01em;
     }
 
-    .btn:hover { background: #E05000; }
+    .btn:hover { background: var(--orange-hover); }
+    .btn:active { transform: scale(0.99); }
     .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
+    /* STATUS */
     .status {
-      margin-top: 20px;
-      padding: 14px;
+      margin-top: 16px;
+      padding: 12px 16px;
       border-radius: 8px;
       font-size: 13px;
       display: none;
+      align-items: center;
+      gap: 10px;
     }
 
     .status.success {
-      background: #1A3A2A;
-      border: 1px solid #2A6A4A;
-      color: #5AE0A0;
-      display: block;
+      background: #F0FDF4;
+      border: 1px solid #BBF7D0;
+      color: #166534;
+      display: flex;
     }
 
     .status.error {
-      background: #3A1A1A;
-      border: 1px solid #6A2A2A;
-      color: #E08080;
-      display: block;
+      background: #FFF1F1;
+      border: 1px solid #FECACA;
+      color: #991B1B;
+      display: flex;
     }
 
     .status.loading {
-      background: #1C2226;
-      border: 1px solid #3A4249;
-      color: #8A9199;
-      display: block;
-    }
-
-    .divider {
-      border: none;
-      border-top: 1px solid #3A4249;
-      margin: 28px 0;
-    }
-
-    .step {
+      background: #FFF7F2;
+      border: 1px solid #FFD5B8;
+      color: var(--orange);
       display: flex;
-      gap: 12px;
-      margin-bottom: 12px;
-      align-items: flex-start;
     }
 
-    .step-num {
-      background: #FF5B00;
-      color: white;
-      font-size: 11px;
-      font-weight: 700;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .status-icon {
+      font-size: 16px;
       flex-shrink: 0;
-      margin-top: 1px;
     }
 
-    .step-text {
-      font-size: 12px;
-      color: #8A9199;
-      line-height: 1.5;
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 11px;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    footer span {
+      color: var(--orange);
+      font-weight: 600;
+    }
+
+    @media (max-width: 720px) {
+      main { flex-direction: column; align-items: center; padding: 24px 16px; }
+      .sidebar { width: 100%; max-width: 560px; }
+      header { padding: 0 20px; }
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <div class="logo">
-      <div class="logo-dot"></div>
-      <span>Kruger — Viáticos</span>
+
+  <header>
+    <div class="logo-wrap">
+      <img src="https://res.cloudinary.com/dwcqgcl0m/image/upload/q_auto/f_auto/v1776721583/krugercorp_logo_ly65c3.jpg" alt="Kruger" />
+      <div class="logo-divider"></div>
+      <span class="logo-product">Gestión de Viáticos</span>
+    </div>
+    <span class="header-badge">Interno</span>
+  </header>
+
+  <main>
+
+    <aside class="sidebar">
+      <p class="sidebar-title">Cómo funciona</p>
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <p class="step-label">Sube tus facturas</p>
+          <p class="step-desc">Adjunta los PDFs de tus comprobantes en Gemini y solicita el procesamiento.</p>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <p class="step-label">Copia el JSON</p>
+          <p class="step-desc">Gemini entregará un JSON estructurado. Cópialo y pégalo en el campo de abajo.</p>
+        </div>
+      </div>
+      <div class="step-connector"></div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <p class="step-label">Registra en tu Sheet</p>
+          <p class="step-desc">Ingresa el link de tu Google Sheet y haz clic en Registrar. Los datos se insertarán automáticamente.</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="card">
+      <div class="card-header">
+        <p class="card-eyebrow">Reporte de viáticos</p>
+        <h1 class="card-title">Cargar respaldo de facturas</h1>
+        <p class="card-subtitle">Registra automáticamente tus comprobantes en la plantilla de viáticos de Kruger.</p>
+      </div>
+
+      <div class="field">
+        <label for="sheetUrl">Google Sheet</label>
+        <input type="text" id="sheetUrl" placeholder="https://docs.google.com/spreadsheets/d/..." />
+        <p class="hint">Asegúrate de compartir el Sheet con la cuenta de Google conectada a n8n.</p>
+      </div>
+
+      <div class="field">
+        <label for="jsonInput">JSON de Gemini</label>
+        <textarea id="jsonInput" placeholder='{"facturas": [...], "alertas": []}'></textarea>
+        <p class="hint">Pega el JSON completo que entregó Gemini sin modificarlo.</p>
+      </div>
+
+      <button class="btn" id="submitBtn" onclick="enviar()">Registrar en Google Sheet</button>
+
+      <div class="status" id="status">
+        <span class="status-icon" id="statusIcon"></span>
+        <span id="statusText"></span>
+      </div>
     </div>
 
-    <h1>Cargar respaldo de facturas</h1>
-    <p class="subtitle">Pega el JSON generado por Gemini y el link de tu Google Sheet para registrar automáticamente los comprobantes.</p>
+  </main>
 
-    <div class="step"><div class="step-num">1</div><div class="step-text">Sube tus PDFs a Gemini y pide que procese las facturas.</div></div>
-    <div class="step"><div class="step-num">2</div><div class="step-text">Copia el JSON que Gemini entrega y pégalo abajo.</div></div>
-    <div class="step"><div class="step-num">3</div><div class="step-text">Ingresa el link de tu Google Sheet y haz clic en Registrar.</div></div>
-
-    <hr class="divider">
-
-    <div class="field">
-      <label>Link del Google Sheet</label>
-      <input type="text" id="sheetUrl" placeholder="https://docs.google.com/spreadsheets/d/..." />
-      <p class="hint">Debe ser un Sheet con la plantilla de viáticos ya preparada.</p>
-    </div>
-
-    <div class="field">
-      <label>JSON de Gemini</label>
-      <textarea id="jsonInput" placeholder='{"facturas": [...], "alertas": [...]}'></textarea>
-      <p class="hint">Copia el JSON completo que entregó Gemini.</p>
-    </div>
-
-    <button class="btn" id="submitBtn" onclick="enviar()">Registrar en Google Sheet</button>
-
-    <div class="status" id="status"></div>
-  </div>
+  <footer>
+    Herramienta interna · <span>Kruger Corporation</span> · Uso exclusivo del equipo comercial
+  </footer>
 
   <script>
     async function enviar() {
@@ -232,19 +397,22 @@
       const jsonRaw = document.getElementById('jsonInput').value.trim();
       const btn = document.getElementById('submitBtn');
       const status = document.getElementById('status');
+      const statusIcon = document.getElementById('statusIcon');
+      const statusText = document.getElementById('statusText');
 
       status.className = 'status';
-      status.textContent = '';
 
       if (!sheetUrl) {
         status.className = 'status error';
-        status.textContent = 'Ingresa el link del Google Sheet.';
+        statusIcon.textContent = '✕';
+        statusText.textContent = 'Ingresa el link del Google Sheet.';
         return;
       }
 
       if (!jsonRaw) {
         status.className = 'status error';
-        status.textContent = 'Pega el JSON de Gemini antes de continuar.';
+        statusIcon.textContent = '✕';
+        statusText.textContent = 'Pega el JSON de Gemini antes de continuar.';
         return;
       }
 
@@ -254,13 +422,15 @@
         parsed = JSON.parse(clean);
       } catch (e) {
         status.className = 'status error';
-        status.textContent = 'El JSON no es válido. Verifica que esté completo y bien formateado.';
+        statusIcon.textContent = '✕';
+        statusText.textContent = 'El JSON no es válido. Verifica que esté completo y bien formateado.';
         return;
       }
 
       btn.disabled = true;
       status.className = 'status loading';
-      status.textContent = 'Enviando a n8n...';
+      statusIcon.textContent = '⟳';
+      statusText.textContent = 'Registrando comprobantes...';
 
       try {
         const res = await fetch('https://krugercorporation.app.n8n.cloud/webhook/viaticos-respaldo', {
@@ -271,17 +441,20 @@
 
         if (res.ok) {
           status.className = 'status success';
-          status.textContent = '✓ Datos registrados correctamente en el Google Sheet.';
+          statusIcon.textContent = '✓';
+          statusText.textContent = `${parsed.facturas?.length || 0} comprobante(s) registrado(s) correctamente en el Sheet.`;
         } else {
           throw new Error(`HTTP ${res.status}`);
         }
       } catch (e) {
         status.className = 'status error';
-        status.textContent = `Error al conectar con n8n: ${e.message}`;
+        statusIcon.textContent = '✕';
+        statusText.textContent = `Error al conectar con n8n: ${e.message}`;
       } finally {
         btn.disabled = false;
       }
     }
   </script>
+
 </body>
 </html>
